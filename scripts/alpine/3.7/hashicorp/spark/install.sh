@@ -26,9 +26,9 @@ echo "export PATH=${PATH}:${SPARK_HOME}/bin" >> /etc/profile.d/spark.sh
 
 for f in /etc/profile.d/*; do source $f; done
 
-wget -qO- https://spark-nomad.s3.amazonaws.com/spark-2.1.1-bin-nomad.tgz | tar -xzC /opt
-# mv /tmp/spark* /opt/spark
-
 apk update
-apk add --virtual .build-dependencies --no-cache alpine-sdk wget
+apk add --virtual .build-dependencies --no-cache wget
 
+mkdir /opt
+sprk_dwnld=https://github.com/hashicorp/nomad-spark/releases/download/v2.2.0-nomad-0.7.0-20180326/spark-2.2.0-bin-nomad-0.7.0-20180326.tgz
+wget -qO- ${sprk_dwnld} | tar -xzC /opt

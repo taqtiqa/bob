@@ -1,8 +1,6 @@
 #!/usr/bin/env sh
-# Alpine:
-# - 3.7
 #
-# References:
+# No Requires
 
 echo $(whoami)
 

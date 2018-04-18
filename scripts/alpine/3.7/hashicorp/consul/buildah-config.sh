@@ -12,19 +12,18 @@ if [ -z ${BUILDAH+x} ];
     echo "BUILDAH is set to '$BUILDAH'."
 fi
 
-# Copy ${OCI_BASE_NAME}/${OCI_BASE_TAG} scripts and artifacts
-${BUILDAH} copy ${OCI_NAME} \
-                "./scripts/${OCI_BASE_NAME}/${OCI_BASE_TAG}/" \
-                '/bob'
-
 ${BUILDAH} config --author "${OCI_AUTHOR}" \
         --cmd "agent -dev -client 0.0.0.0" \
-        --created-by "${OCI_AUTHOR}" \
         --entrypoint "/usr/local/bin/consul-entrypoint.sh" \
         --port 8888/tcp \
         --port 8300/tcp \
-        --port 8301 8301/udp 8302 8302/udp \
-        --port 8500 8600 8600/udp \
+        --port 8301/tcp \
+        --port 8301/udp \
+        --port 8302/tcp \
+        --port 8302/udp \
+        --port 8500/tcp \
+        --port 8600/tcp \
+        --port 8600/udp \
         --shell "/bin/bash -E" \
         --user ${OCI_USER} \
         --volume "/consul/data" \

@@ -1,20 +1,9 @@
 #!/usr/bin/env sh
 
 # Requires
-# 
-# ./bob/bob.sh
+# - common-setup.sh
+# - ./bob/bob.sh
 #
-
-export oci_u=jovyan
-export oci_u_id=1000
-export oci_u_g_id=100
-export oci_u_g=$(getent group ${oci_u_g_id}|cut -d: -f1)
-
-export OCI_ORG='taqtiqa.io'
-export OCI_AUTHOR='TAQTIQA LLC'
-export OCI_EMAIL='coders@taqtiqa.com'
-export OCI_ARCH='amd64'
-export OCI_OS='linux'
 
 # # cat /etc/os-release
 # NAME="Alpine Linux"
@@ -28,17 +17,17 @@ source /etc/os-release
 DISTRIB_ID=${ID}
 DISTRIB_RELEASE=${VERSION_ID} 
 # 3.7.0 -> 3.7     
-DISTRIB_CODENAME=${VERSION_ID%.*}  
+DISTRIB_CODENAME=${VERSION_ID%.*}
 DISTRIB_DESCRIPTION=${PRETTY_NAME} 
 
 echo "export DISTRIB_ID=${ID}" >> /etc/profile.d/bob.sh
 echo "export DISTRIB_RELEASE=${VERSION_ID}" >> /etc/profile.d/bob.sh
 echo "export DISTRIB_CODENAME=${VERSION_ID%.*}" >> /etc/profile.d/bob.sh
 echo "export DISTRIB_DESCRIPTION=${PRETTY_NAME}" >> /etc/profile.d/bob.sh
-echo "export OCI_USER=${oci_u}" >> /etc/profile.d/bob.sh
-echo "export OCI_USER_ID=${oci_u_id}" >> /etc/profile.d/bob.sh
-echo "export OCI_USER_GROUP_ID=${oci_u_g_id}" >> /etc/profile.d/bob.sh
-echo "export OCI_USER_GROUP=${oci_u_g}" >> /etc/profile.d/bob.sh
+echo "export OCI_USER=${OCI_USER}" >> /etc/profile.d/bob.sh
+echo "export OCI_USER_ID=${OCI_USER_ID}" >> /etc/profile.d/bob.sh
+echo "export OCI_USER_GROUP_ID=${OCI_USER_GROUP_ID}" >> /etc/profile.d/bob.sh
+echo "export OCI_USER_GROUP=${OCI_USER_GROUP}" >> /etc/profile.d/bob.sh
 
 #
 # Load required env variables is case we are building 

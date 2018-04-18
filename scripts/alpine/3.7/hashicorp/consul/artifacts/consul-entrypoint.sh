@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 set -e
 
 # Note above that we run dumb-init as PID 1 in order to reap zombie processes
