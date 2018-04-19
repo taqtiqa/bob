@@ -31,7 +31,7 @@ If you change the directories/files you would like checked out from Bob:
 1. run `git read-tree -mu HEAD` (note `-mu` is merge then update).
 
 ### New repository
-
+**WARNING: INCOMPLETE-DO-NOT-BLINDLY-APPLY**
 ````bash
 BOB_REPO=oci-jupyter-base
 BOB_DIST=alpine
@@ -40,25 +40,37 @@ BOB_DIST_RELEASE=3.7
 mkdir ${BOB_REPO} 
 cd ${BOB_REPO}
 git init
-git remote add --fetch bob https://github.com/taqtiqa/bob.git
+git checkout -b bob-master
+git remote add bob https://github.com/taqtiqa/bob.git
+git branch --set-upstream-to=bob/master
 git config core.sparsecheckout true
 echo scripts/${BOB_DIST}/${BOB_DIST_RELEASE}/ >> .git/info/sparse-checkout
 echo another/sub/tree >> .git/info/sparse-checkout
 git --depth=1 pull bob master
+
 ````
 
 ### Existing repository
-
+**WARNING: INCOMPLETE-DO-NOT-BLINDLY-APPLY**
 ````bash
 BOB_REPO=jupyter-base
 BOB_DIST=alpine
 BOB_DIST_RELEASE=3.7
 
 cd ${BOB_REPO}
-git remote add --fetch bob https://github.com/taqtiqa/bob.git
+# create new branch
+git checkout --orphan bob-master
+rm -rf ./
+rm .gitignore
+#git rm --cached ./*
+git remote add bob https://github.com/taqtiqa/bob.git
+git branch --set-upstream-to=bob/master bob
 git config core.sparsecheckout true
 echo scripts/${BOB_DIST}/${BOB_DIST_RELEASE}/ >> .git/info/sparse-checkout
-git read-tree -mu HEAD
+git pull --depth 1 bob master
+git checkout master
+git merge bob-master
+echo scripts >>.gitignore
 ```` 
 
 # License
