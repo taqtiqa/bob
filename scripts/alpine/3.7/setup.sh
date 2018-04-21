@@ -4,6 +4,11 @@
 # - common-setup.sh
 # - ./bob/bob.sh
 #
+echo "############################################"
+echo "##"
+echo "## Bob: ${0}"
+echo "##"
+echo "############################################"
 
 # # cat /etc/os-release
 # NAME="Alpine Linux"
