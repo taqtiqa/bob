@@ -31,9 +31,7 @@ If you change the directories/files you would like checked out from Bob:
 1. run `git read-tree -mu HEAD` (note `-mu` is merge then update).
 
 ### New repository
-
 **WARNING: INCOMPLETE-DO-NOT-BLINDLY-APPLY**
-#### Subtree
 **NOTE:** Requires git version > 2.12
 ````bash
 sudo add-apt-repository ppa:git-core/ppa
@@ -41,7 +39,7 @@ sudo apt-get update
 sudo apt-get install git
 ````
 
-To add bob scripts (squashes all commits, like a `git clone --depth=1 ...` ):
+To add bob (squashes all commits, like a `git clone --depth=1 ...` ):
 ````bash
 BOB_REPO=jupyter-base
 BOB_DIST=alpine
@@ -56,11 +54,9 @@ git subtree add --prefix bob https://github.com/taqtiqa/bob.git master --squash
 
 To update bob:
 ````bash
-git add . && git commit -m 'Commit before pulling updated Bob scripts'
 git subtree pull --prefix bob https://github.com/taqtiqa/bob.git master --squash
 ````
 
-#### Submodules
 Using submodules is more intricate:
 ````bash
 BOB_REPO=oci-jupyter-base
@@ -81,14 +77,21 @@ git submodule update --force --checkout bob
 
 ### Existing repository
 **WARNING: INCOMPLETE-DO-NOT-BLINDLY-APPLY**
-
-#### Subtree
 **NOTE:** Requires git version > 2.12
 ````bash
-sudo add-apt-repository ppa:git-core/ppa
-sudo apt-get update
-sudo apt-get install git
-````
+BOB_REPO=jupyter-base
+BOB_DIST=alpine
+BOB_DIST_RELEASE=3.7
+
+cd ${BOB_REPO}
+git clone --depth=1 --no-checkout https://github.com/taqtiqa/bob.git bob
+git submodule add https://github.com/taqtiqa/bob.git bob
+git submodule absorbgitdirs
+git -C bob config core.sparseCheckout true
+echo 'scripts/${BOB_DIST}/${BOB_DIST_RELEASE}/*' >>.git/modules/bob/info/sparse-checkout
+git submodule update --force --checkout bob
+```` 
+
 To add bob:
 ````bash
 BOB_REPO=jupyter-base
@@ -103,22 +106,6 @@ To update bob:
 ````bash
 git subtree pull --prefix bob https://github.com/taqtiqa/bob.git master --squash
 ````
-
-#### Submodules
-Using submodules is more intricate:
-````bash
-BOB_REPO=jupyter-base
-BOB_DIST=alpine
-BOB_DIST_RELEASE=3.7
-
-cd ${BOB_REPO}
-git clone --depth=1 --no-checkout https://github.com/taqtiqa/bob.git bob
-git submodule add https://github.com/taqtiqa/bob.git bob
-git submodule absorbgitdirs
-git -C bob config core.sparseCheckout true
-echo 'scripts/${BOB_DIST}/${BOB_DIST_RELEASE}/*' >>.git/modules/bob/info/sparse-checkout
-git submodule update --force --checkout bob
-```` 
 
 # License
 

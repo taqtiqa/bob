@@ -2,16 +2,15 @@
 #
 # Requires
 #
-# - setup.sh
-# - sudo/install.sh
-# - user/install.sh ${OCI_USER}
+# - user/aportser.sh
 # - aports/install.sh
+# - user/aportser.sh 
 
 for f in /etc/profile.d/*; do source $f; done
 
 apk add --virtual .build-dependencies unzip xz xz-libs
 
-alpine_aports_user=${OCI_USER:-bob}
+alpine_aports_user=aportser
 
 ##
 ## NOTE aports/install.sh is where the package folder 
@@ -41,10 +40,15 @@ su --login --command "cp ${src} ${dst}" ${alpine_aports_user}
 su --login --command "cd /${pkg_dir} && abuild checksum" ${alpine_aports_user}
 su --login --command "PATH=/usr/lib:$PATH && cd /${pkg_dir} && abuild -r" ${alpine_aports_user}
 
+pkg_name=texmf-dist
+pkg_dir=/tmp/aports/community/$pkg_name 
+su - ${alpine_aports_user} -c "cd ${pkg_dir} && abuild checksum"
+su - ${alpine_aports_user} -c "cd ${pkg_dir} && abuild -r"
+
 # Install built package
 pkg_name=texlive-full
-pkg_ver=20170524-r5
-apk add /tmp/packages/community/x86_64/${pkg_name}-${pkg_ver}.apk
+pkg_ver=20170524-r6
+apk add /tmp/packages/community/x86_64/$pkg_name-$pkg_ver.apk
 
 #
 # Test build
