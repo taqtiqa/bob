@@ -24,14 +24,8 @@ for f in /etc/profile.d/*; do source $f; done
 
 apk update
 apk upgrade 
-apk add --no-cache bash shadow
+
 apk add --virtual .build-dependencies --no-cache ca-certificates
-
-useradd --create-home --shell /bin/bash --no-user-group --non-unique --uid ${OCI_USER_ID} ${OCI_USER}
-
-chown ${OCI_USER}:${OCI_USER_GROUP} /home/${OCI_USER}
-chmod -Rv 6755 /home/${OCI_USER}
-chmod -Rv u=rwx,go=rwx,a+s /home/${OCI_USER}
 
 chown ${OCI_USER}:${OCI_USER_GROUP} ${CONDA_DIR}
 chmod -Rv 6755 ${CONDA_DIR}
