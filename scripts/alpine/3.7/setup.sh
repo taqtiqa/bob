@@ -43,7 +43,9 @@ then
   # in the same shell session
   #
   for f in /etc/profile.d/*; do source $f; done
-
+  
+  apk add openrc --no-cache
+  
 else
   source ./bob/scripts/${OCI_DISTRIB_ID}/${OCI_DISTRIB_CODENAME}/common-setup.sh
 fi
