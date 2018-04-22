@@ -8,7 +8,7 @@
 
 for f in /etc/profile.d/*; do source $f; done
 
-apk add --virtual .build-dependencies unzip xz xz-libs
+apk add --no-cache --virtual .build-dependencies unzip xz xz-libs
 
 alpine_aports_user=aportser
 
@@ -23,9 +23,9 @@ alpine_aports_user=aportser
 pkg_name=texmf-dist
 pkg_dir=tmp/aports/community/${pkg_name}
 mkdir --parents ${pkg_dir}
-src=/bob/aports/artifacts/${pkg_name}/APKBUILD.${pkg_name}
+src=/bob/aports/artifacts/community/${pkg_name}/APKBUILD.${pkg_name}
 dst=/${pkg_dir}/APKBUILD
-su --login --command "cp ${src} ${dst}" ${alpine_aports_user}
+su -l ${alpine_aports_user} -c "cp ${src} ${dst}" 
 su --login --command "cd /${pkg_dir} && abuild checksum" ${alpine_aports_user} 
 su - ${alpine_aports_user} --command "cd /${pkg_dir} && abuild -r" 
 
@@ -34,7 +34,7 @@ su - ${alpine_aports_user} --command "cd /${pkg_dir} && abuild -r"
 pkg_name=texlive
 pkg_dir=tmp/aports/community/${pkg_name}
 mkdir --parents ${pkg_dir}
-src=/bob/aports/artifacts/${pkg_name}/APKBUILD.${pkg_name}
+src=/bob/aports/artifacts/community/${pkg_name}/APKBUILD.${pkg_name}
 dst=/${pkg_dir}/APKBUILD
 su --login --command "cp ${src} ${dst}" ${alpine_aports_user}
 su --login --command "cd /${pkg_dir} && abuild checksum" ${alpine_aports_user}
