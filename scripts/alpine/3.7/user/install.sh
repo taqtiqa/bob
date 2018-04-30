@@ -6,8 +6,12 @@ user_name=${1:-bob}
 
 for f in /etc/profile.d/*; do source $f; done
 
-adduser -h /home/${user_name} -G 'wheel' -S -s /bin/ash ${user_name}
-passwd -d ${user_name}
+adduser -D -u ${OCI_USER_ID} ${user_name} ${OCI_USER_GROUP}
+
+addgroup ${user_name} wheel
+
+echo "%wheel ALL=(ALL) NOPASSWD: ALL" >>/etc/sudoers
+
 # passwd ${user_name}<<EOF
 # ${user_name}${user_name}
 # ${user_name}${user_name}
