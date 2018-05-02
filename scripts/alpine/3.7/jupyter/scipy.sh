@@ -6,8 +6,11 @@
 # - glibc/install.sh
 # - miniconda3/install.sh
 # - jupyter/install.sh
-# - pandoc/install.sh
+# - user/aportser.sh
 # - aports/install.sh
+# - texlive/build.sh
+# - texlive/jupyter.sh
+# - pandoc/install.sh
 # - jupyter/minimal.sh
 
 #
@@ -19,7 +22,6 @@ echo "export MPLBACKEND=Agg" >> /etc/profile.d/jupyter-scipy.sh
 
 for f in /etc/profile.d/*; do source $f; done
 
-apk update
 apk add --virtual .build-dependencies --no-cache alpine-sdk
 
 ## NOTE: 

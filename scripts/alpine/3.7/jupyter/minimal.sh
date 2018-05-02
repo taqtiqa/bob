@@ -7,8 +7,10 @@
 # - miniconda3/install.sh
 # - jupyter/install.sh
 # - pandoc/install.sh
+# - user/aportser.sh
 # - aports/install.sh
-# - texlive/install.sh
+# - texlive/build.sh
+# - texlive/jupyter.sh
 
 #
 # Load required env variables: build is in OCI/ACI shell session
@@ -30,12 +32,11 @@ apk add --no-cache biber \
         libxrender \
         python3-dev \
         racktables \
-        texlive-xetex \
-        texmf-dist-most \
         unzip \
         vim
 
-# #build-essential \ alpine-sdk
+# # Mapping Docker-Ubuntu \ Buildah-Alpine   
+# #    build-essential \ alpine-sdk
 # #    emacs \ emacs-nox
 # #    git \ 
 # #    inkscape \ inkscape

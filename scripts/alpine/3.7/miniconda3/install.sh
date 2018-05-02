@@ -28,9 +28,9 @@ cd /tmp
 apk add --no-cache --virtual=.build-dependencies ca-certificates bash
 wget --quiet "https://repo.continuum.io/miniconda/Miniconda3-${BUILD_MINICONDA_VERSION}-Linux-x86_64.sh" \
              -O miniconda.sh
-echo "${BUILD_CONDA_MD5_CHECKSUM} miniconda.sh" | md5sum -c - 
+echo "${BUILD_CONDA_MD5_CHECKSUM}  miniconda.sh" | md5sum -c - 
 mkdir -p ${BUILD_CONDA_DIR}
-bash miniconda.sh -f -b -p ${BUILD_CONDA_DIR}
+/bin/bash miniconda.sh -f -b -p ${BUILD_CONDA_DIR}
 rm miniconda.sh 
 ${BUILD_CONDA_DIR}/bin/conda config --system --prepend channels conda-forge
 ${BUILD_CONDA_DIR}/bin/conda config --system --set auto_update_conda false
@@ -43,7 +43,7 @@ chmod 777 "${BUILD_CONDA_DIR}/locks"
 #
 # Cleanup
 #
-rm "/root/.wget-hsts"
+rm -f "/root/.wget-hsts"
 # Remove bash history
 unset HISTFILE
 rm -f /root/.bash_history

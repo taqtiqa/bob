@@ -4,11 +4,8 @@
 #
 # - user/aportser.sh
 # - aports/install.sh
-# - user/aportser.sh 
 
 for f in /etc/profile.d/*; do source $f; done
-
-apk add --no-cache --virtual .build-dependencies unzip xz xz-libs
 
 apk add --no-cache --virtual .build-dependencies perl \
         freetype-dev \
@@ -24,7 +21,10 @@ apk add --no-cache --virtual .build-dependencies perl \
         libxmu-dev \
         fontconfig-dev \
         libxaw-dev \
-        motif-dev
+        motif-dev \
+        unzip \
+        xz \
+        xz-libs
 
 alpine_aports_user=aportser
 
@@ -48,7 +48,7 @@ su -l ${alpine_aports_user} -c "cd /${pkg_dir} && abuild -r"
 # Creates the following in:
 # /home/${alpine_aports_user}/packages/community/x86_64/
 # Size     Name
-# APKINDEX.tar.gz
+# ?????? APKINDEX.tar.gz
 # ?????? texmf-dist-2017.46770-r0.apk
 #   3.9M texmf-dist-bibtexextra-2017.46770-r0.apk
 # 499.8M texmf-dist-fontsextra-2017.46770-r0.apk
@@ -85,7 +85,7 @@ su -l ${alpine_aports_user} -c "cd /${pkg_dir} && abuild -r"
 # Creates the following in:
 # /home/${alpine_aports_user}/packages/community/x86_64/
 # Size     Name
-# APKINDEX.tar.gz
+# ?????? APKINDEX.tar.gz
 #   6.8M texlive-20170524-r6.apk
 # 553.3K texlive-dev-20170524-r6.apk
 # 498.6K texlive-doc-20170524-r6.apk
@@ -95,7 +95,7 @@ su -l ${alpine_aports_user} -c "cd /${pkg_dir} && abuild -r"
 # 273.3K texlive-xetex-20170524-r6.apk
 # 289.3K xdvik-20170524-r6.apk
 
-# Install built package
+# Install built packages in .build-dependencies
 cp -f /etc/apk/repositories /etc/apk/repositories.bak
 echo /home/${alpine_aports_user}/packages/testing/ >>/etc/apk/repositories
 echo /home/${alpine_aports_user}/packages/community/ >>/etc/apk/repositories
@@ -109,4 +109,4 @@ rm -f /etc/apk/repositories.bak
 #
 # Test build
 #
-su -l ${alpine_aports_user} -c "pdflatex -output-format=pdf -output-directory=/tmp /bob/texlive/artifacts/tmp/texlive-test.tex" 
+su -l ${alpine_aports_user} -c "pdflatex -output-format=pdf -output-directory=/tmp /bob/texlive/artifacts/texlive-check.tex" 

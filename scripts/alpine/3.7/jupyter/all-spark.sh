@@ -4,10 +4,13 @@
 #
 # - setup.sh
 # - glibc/install.sh
-# - miniconda3/install.sh
 # - jupyter/install.sh
-# - pandoc/install.sh
+# - user/aportser.sh
 # - aports/install.sh
+# - texlive/build.sh
+# - texlive/jupyter.sh
+# - pandoc/install.sh
+# - miniconda3/install.sh
 # - jupyter/minimal.sh
 # - jupyter/scipy.sh
 # - jupyter/r.sh
