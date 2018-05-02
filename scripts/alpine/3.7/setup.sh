@@ -47,7 +47,7 @@ then
   apk add openrc --no-cache
   
 else
-  source ./bob/scripts/${OCI_DISTRIB_ID}/${OCI_DISTRIB_CODENAME}/common-setup.sh
+  echo 'Bob scripts not present. See https://github.com/taqtiqa-mark/bob'
 fi
 
 # source ./bob/bob.sh

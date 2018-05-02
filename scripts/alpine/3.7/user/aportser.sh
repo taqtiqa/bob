@@ -6,8 +6,7 @@ alpine_aports_user=aportser
 
 for f in /etc/profile.d/*; do source $f; done
 
-adduser ${alpine_aports_user}
-passwd -d ${alpine_aports_user}
+adduser -D ${alpine_aports_user}
 
 addgroup ${alpine_aports_user} abuild
 addgroup ${alpine_aports_user} wheel

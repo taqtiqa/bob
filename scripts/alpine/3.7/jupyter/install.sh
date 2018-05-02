@@ -55,6 +55,6 @@ cp ${src}/start-notebook.sh ${dest}/start-notebook.sh
 cp ${src}/jupyter_notebook_config.py ${dest}/jupyter_notebook_config.py
 
 conda clean -tipsy
-npm cache clean 
+npm --force cache clean 
 rm -rf ${CONDA_DIR}/share/jupyter/lab/staging
 rm -rf /home/${OCI_USER}/.cache/yarn

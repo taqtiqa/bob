@@ -17,7 +17,6 @@
 #
 for f in /etc/profile.d/*; do source $f; done
 
-apk update
 apk add --virtual .build-dependencies --no-cache alpine-sdk
 
 # Install all OS dependencies for fully functional notebook server

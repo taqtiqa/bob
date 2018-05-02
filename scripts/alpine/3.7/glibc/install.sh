@@ -50,6 +50,6 @@ rm "$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" "$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" "$
 # 
 # libstdc++.so.6.0.21 is a Bob artifact
 # Required by nodejs,kibana
-
-ln -s /usr/lib/libstdc++.so.6.0.22 /usr/lib/libstdc++.so.6.new 
+cp /bob/glibc/artifacts/usr/lib/libstdc++.so.6.0.21 /usr/lib/libstdc++.so.6.0.21
+ln -s /usr/lib/libstdc++.so.6.0.21 /usr/lib/libstdc++.so.6.new 
 mv /usr/lib/libstdc++.so.6.new /usr/lib/libstdc++.so.6
